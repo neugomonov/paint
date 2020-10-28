@@ -2,10 +2,13 @@ package space.neugomonov.anothergraphicseditor;
 
 import android.app.Dialog;
 import android.os.Bundle;
+
+import java.io.IOException;
 import java.util.UUID;
 import android.provider.MediaStore;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -20,27 +23,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener, SeekBar.OnSeekBarChangeListener {
     private TextView mTextView;
-    private ImageButton currPaint, drawBtn,baru,erase,save;
+    private ImageButton currPaint, drawBtn,newFile,erase,save;
     private DrawingView drawView;
-    private float smallBrush, mediumBrush, largeBrush;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         drawView = (DrawingView)findViewById(R.id.drawing);
         drawBtn = (ImageButton)findViewById(R.id.draw_btn);
-        baru = (ImageButton)findViewById(R.id.new_btn);
+        newFile = (ImageButton)findViewById(R.id.new_btn);
         erase = (ImageButton)findViewById(R.id.erase_btn);
         save = (ImageButton)findViewById(R.id.save_btn);
         LinearLayout paintLayout = (LinearLayout)findViewById(R.id.paint_colors);
         currPaint = (ImageButton)paintLayout.getChildAt(0);
         currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
-        smallBrush = getResources().getInteger(R.integer.small_size);
-        mediumBrush = getResources().getInteger(R.integer.medium_size);
-        largeBrush = getResources().getInteger(R.integer.large_size);
         drawBtn.setOnClickListener(this);
-        drawView.setBrushSize(smallBrush);
-        baru.setOnClickListener(this);
+        drawView.setBrushSize(10);
+        newFile.setOnClickListener(this);
         erase.setOnClickListener(this);
         save.setOnClickListener(this);
 
@@ -115,11 +114,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                             getContentResolver(), drawView.getDrawingCache(),
                             UUID.randomUUID().toString()+".png", "drawing");
                     if(imgSaved!=null){
-                        Toast savedToast = Toast.makeText(getApplicationContext(),
-                                "Drawing saved to gallery.", Toast.LENGTH_SHORT);
-                        savedToast.show();
+//                    try {
+                         Toast.makeText(getApplicationContext(),
+                                "Drawing saved to gallery.", Toast.LENGTH_LONG).show();
                     }
-                    else{
+                    else {
+//                    catch (IOException e){
+//                        Log.e(MainActivity.class.getCanonicalName(), e.getMessage());
+//                        Toast.makeText(MainActivity.this, "Error while saving: "
+//                         + e.getMessage(), Toast.LENGTH_LONG).show();
                         Toast unsavedToast = Toast.makeText(getApplicationContext(),
                                 "Error occurred.", Toast.LENGTH_SHORT);
                         unsavedToast.show();

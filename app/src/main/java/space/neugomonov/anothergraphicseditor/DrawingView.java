@@ -97,7 +97,6 @@ public class DrawingView extends View {
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
         canvasPaint = new Paint(Paint.DITHER_FLAG);
-//        brushSize = getResources().getInteger(R.integer.large_size);
         lastBrushSize = brushSize;
         drawPaint.setStrokeWidth(brushSize);
     }
