@@ -67,15 +67,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:progress="10" />
-
-    <!-- Top Row -->
-    <space.neugomonov.anothergraphicseditor.DrawingView
-        android:id="@+id/drawing"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#FFFFFFFF" />
-
     <LinearLayout
         android:id="@+id/paint_colors"
         android:layout_gravity="center"
@@ -192,6 +183,15 @@
             android:src="@drawable/paint"
             android:tag="#000000" />
     </LinearLayout>
+
+    <!-- Top Row -->
+    <space.neugomonov.anothergraphicseditor.DrawingView
+        android:id="@+id/drawing"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FFFFFFFF" />
+
 
 </LinearLayout>
 

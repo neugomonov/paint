@@ -13,7 +13,6 @@ import android.util.TypedValue;
 import android.content.Context;
 import android.util.AttributeSet;
 
-
 public class DrawingView extends View {
     private Path drawPath;
     private boolean erase=false;
@@ -24,7 +23,6 @@ public class DrawingView extends View {
     private float brushSize, lastBrushSize;
     public DrawingView(Context context, AttributeSet attrs){
         super(context, attrs);
-
         setupDrawing();
     }
     public void startNew(){

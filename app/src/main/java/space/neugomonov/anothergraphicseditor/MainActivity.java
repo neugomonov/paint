@@ -2,7 +2,6 @@ package space.neugomonov.anothergraphicseditor;
 
 import android.app.Dialog;
 import android.os.Bundle;
-
 import java.io.IOException;
 import java.util.UUID;
 import android.provider.MediaStore;
@@ -42,12 +41,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         newFile.setOnClickListener(this);
         erase.setOnClickListener(this);
         save.setOnClickListener(this);
-
         SeekBar seekBar = (SeekBar)findViewById(R.id.seekBar);
         seekBar.setOnSeekBarChangeListener(this);
         mTextView = (TextView)findViewById(R.id.textView);
         mTextView.setText(String.valueOf(seekBar.getProgress()));
-
     }
     public void paintClicked(View view){
         drawView.setBrushSize(drawView.getLastBrushSize());
@@ -58,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
             imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
             currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
             currPaint=(ImageButton)view;
-
         }
     }
 
@@ -143,7 +139,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         mTextView.setText(String.valueOf(seekBar.getProgress()));
-//        drawView.setErase(false);
         drawView.setBrushSize(progress);
         drawView.setLastBrushSize(progress);
 
