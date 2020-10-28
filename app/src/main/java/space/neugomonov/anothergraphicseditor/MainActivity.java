@@ -1,5 +1,6 @@
 package space.neugomonov.anothergraphicseditor;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import java.util.UUID;
 import android.provider.MediaStore;
@@ -19,9 +20,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener, SeekBar.OnSeekBarChangeListener {
     private TextView mTextView;
-    public static float brushSize = 10;
     private ImageButton currPaint, drawBtn,baru,erase,save;
     private DrawingView drawView;
+    private float smallBrush, mediumBrush, largeBrush;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,18 +35,23 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         LinearLayout paintLayout = (LinearLayout)findViewById(R.id.paint_colors);
         currPaint = (ImageButton)paintLayout.getChildAt(0);
         currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
+        smallBrush = getResources().getInteger(R.integer.small_size);
+        mediumBrush = getResources().getInteger(R.integer.medium_size);
+        largeBrush = getResources().getInteger(R.integer.large_size);
         drawBtn.setOnClickListener(this);
+        drawView.setBrushSize(smallBrush);
         baru.setOnClickListener(this);
         erase.setOnClickListener(this);
         save.setOnClickListener(this);
-        mTextView = (TextView)findViewById(R.id.textView);
-        mTextView.setText("0");
 
         SeekBar seekBar = (SeekBar)findViewById(R.id.seekBar);
         seekBar.setOnSeekBarChangeListener(this);
+        mTextView = (TextView)findViewById(R.id.textView);
+        mTextView.setText(String.valueOf(seekBar.getProgress()));
 
     }
     public void paintClicked(View view){
+        drawView.setBrushSize(drawView.getLastBrushSize());
         if(view!=currPaint){
             ImageButton imgView = (ImageButton)view;
             String color = view.getTag().toString();
@@ -53,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
             imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
             currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
             currPaint=(ImageButton)view;
+
         }
     }
 
@@ -74,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.draw_btn){
-            drawView.setupDrawing();
+                drawView.setErase(false);
         }
         if(v.getId()==R.id.erase_btn){
             drawView.setErase(true);
@@ -83,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         if(v.getId()==R.id.new_btn){
             AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
             newDialog.setTitle("New drawing");
-            newDialog.setMessage("Start new drawing (you will lose the current drawing)?");
+            newDialog.setMessage("Start new drawing (you will lose the current drawing unless you saved it)?");
             newDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
                 public void onClick(DialogInterface dialog, int which){
                     drawView.startNew();
@@ -100,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         if(v.getId()==R.id.save_btn){
             AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
             saveDialog.setTitle("Save drawing");
-            saveDialog.setMessage("Save drawing to device Gallery?");
+            saveDialog.setMessage("Save drawing to device gallery?");
             saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
                 public void onClick(DialogInterface dialog, int which){
                     drawView.setDrawingCacheEnabled(true);
@@ -133,7 +140,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         mTextView.setText(String.valueOf(seekBar.getProgress()));
-        brushSize = progress;
+//        drawView.setErase(false);
+        drawView.setBrushSize(progress);
+        drawView.setLastBrushSize(progress);
 
     }
 

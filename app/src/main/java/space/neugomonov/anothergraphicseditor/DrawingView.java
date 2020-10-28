@@ -12,14 +12,16 @@ import android.graphics.PorterDuffXfermode;
 import android.util.TypedValue;
 import android.content.Context;
 import android.util.AttributeSet;
+
+
 public class DrawingView extends View {
     private Path drawPath;
     private boolean erase=false;
     private Paint drawPaint, canvasPaint;
-    private int paintColor = 0xAAAAAAAA;
+    private int paintColor = 0x40000000;
     private Canvas drawCanvas;
     private Bitmap canvasBitmap;
-    public float /*brushSize,*/ lastBrushSize;
+    private float brushSize, lastBrushSize;
     public DrawingView(Context context, AttributeSet attrs){
         super(context, attrs);
 
@@ -37,9 +39,10 @@ public class DrawingView extends View {
     public void setBrushSize(float newSize){
         float pixelAmount = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 newSize, getResources().getDisplayMetrics());
-        MainActivity.brushSize = pixelAmount;
-        drawPaint.setStrokeWidth(MainActivity.brushSize);
+        brushSize=pixelAmount;
+        drawPaint.setStrokeWidth(brushSize);
     }
+
     public void setLastBrushSize(float lastSize){
         lastBrushSize=lastSize;
     }
@@ -84,17 +87,18 @@ public class DrawingView extends View {
         drawPaint.setColor(paintColor);
     }
     public void setupDrawing(){
+        lastBrushSize = brushSize;
         drawPath = new Path();
         drawPaint = new Paint();
         drawPaint.setColor(paintColor);
         drawPaint.setAntiAlias(true);
-        drawPaint.setStrokeWidth(5);
+        drawPaint.setStrokeWidth(brushSize);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
         canvasPaint = new Paint(Paint.DITHER_FLAG);
-        MainActivity.brushSize = getResources().getInteger(R.integer.small_size);
-        lastBrushSize = MainActivity.brushSize;
-        drawPaint.setStrokeWidth(MainActivity.brushSize);
+//        brushSize = getResources().getInteger(R.integer.large_size);
+        lastBrushSize = brushSize;
+        drawPaint.setStrokeWidth(brushSize);
     }
 }

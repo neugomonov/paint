@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -64,7 +65,8 @@
     <SeekBar
         android:id="@+id/seekBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:progress="10" />
 
     <!-- Top Row -->
     <space.neugomonov.anothergraphicseditor.DrawingView
@@ -85,11 +87,11 @@
             android:layout_width="@dimen/large_brush"
             android:layout_height="@dimen/large_brush"
             android:layout_marginBottom="2dp"
-            android:background="#000000"
+            android:background="#40000000"
             android:contentDescription="@string/paint"
             android:onClick="paintClicked"
             android:src="@drawable/paint"
-            android:tag="#000000" />
+            android:tag="#40000000" />
 
         <ImageButton
             android:layout_width="@dimen/large_brush"
@@ -164,31 +166,32 @@
             android:layout_width="@dimen/large_brush"
             android:layout_height="@dimen/large_brush"
             android:layout_marginBottom="2dp"
-            android:background="#FFFFFF"
+            android:background="#40FFFFFF"
             android:contentDescription="@string/paint"
             android:onClick="paintClicked"
             android:src="@drawable/paint"
-            android:tag="#FFFFFF" />
+            android:tag="#40FFFFFF" />
 
         <ImageButton
             android:layout_width="@dimen/large_brush"
             android:layout_height="@dimen/large_brush"
             android:layout_marginBottom="2dp"
-            android:background="#BABABA"
+            android:background="#BE000000"
             android:contentDescription="@string/paint"
             android:onClick="paintClicked"
             android:src="@drawable/paint"
-            android:tag="#BABABA" />
+            android:tag="#BE000000" />
 
         <ImageButton
             android:layout_width="@dimen/large_brush"
             android:layout_height="@dimen/large_brush"
             android:layout_marginBottom="2dp"
-            android:background="#505050"
+            android:background="#000000"
             android:contentDescription="@string/paint"
             android:onClick="paintClicked"
             android:src="@drawable/paint"
-            android:tag="#505050" />
+            android:tag="#000000" />
     </LinearLayout>
+
 </LinearLayout>
 
