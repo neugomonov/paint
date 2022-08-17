@@ -7,6 +7,6 @@ Drawing application. Brush with a choice of thickness, colors and translucency, 
 
 ![](sus.jpg) 
 ![](saved.png) 
-
 ![](app/src/main/res/drawable-v24/frog.gif) 
+	
 <b> 🐸 FROGGED </b>
